@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+<div class="container">
+    <div class="card" style="margin-top: 70px;">
+        <div class="card-header text-center">
+            <h3>Aniversário Luiza - Lista de confirmação</h3>
+        </div>
+        <div class="card-body">
+            <form method="get" action="{% url 'index' %}">
+                <div class="input-group mb-3">
+                    <input type="text" name="q" class="form-control" placeholder="Buscar convidado" value="{{ query|default:'' }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+                    </div>
+                </div>
+            </form>
+            <table class="table">
+                <thead class="table-dark">
+                    <tr class="text-center">
+                        <th scope="col">Convidado</th>
+                        <th scope="col">Resposta</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    {% for guest in guests %}
+                        <tr class="text-center">
+                            <th scope="row">{{guest.name}}</th>
+                            <td>
+                                <form method="post" style="display:inline;" action="{% url 'index' %}" >
+                                    {% csrf_token %}
+                                    <input type="hidden" name="guest_id" value="{{ guest.id }}">
+                                    <input type="hidden" name="confirmed" value="True">
+                                    <button type="submit" class="btn btn-sm btn-success">Confirmar presença</button>
+                                </form>
+                                <form method="post" style="display:inline;" action="{% url 'index' %}" >
+                                    {% csrf_token %}
+                                    <input type="hidden" name="guest_id" value="{{ guest.id }}">
+                                    <input type="hidden" name="confirmed" value="False">
+                                    <button type="submit" class="btn btn-sm btn-danger">Não irei</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock 'main' %}
