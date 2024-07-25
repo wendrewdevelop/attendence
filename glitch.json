@@ -1,0 +1,7 @@
+{
+    "start": "gunicorn attendence.wsgi --log-file -",
+    "scripts": {
+      "start": "gunicorn attendence.wsgi --log-file -"
+    }
+  }
+  
