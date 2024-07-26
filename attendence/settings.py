@@ -28,6 +28,9 @@ SECRET_KEY = 'django-insecure--+=2$bpwn^2l4#^zr)##r_+t3qme0p+c(!3054a1g2*@5os0po
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = [
+    'https://llkvzh-ip-177-200-73-217.tunnelmole.net',
+]
 
 
 # Application definition
@@ -54,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'attendence.utils.NgrokSkipWarningMiddleware'
 ]
 
 ROOT_URLCONF = 'attendence.urls'
@@ -125,7 +129,7 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'

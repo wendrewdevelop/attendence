@@ -6,7 +6,7 @@ from django.shortcuts import (
 from datetime import datetime
 from django.views import View
 from django.db.models import Q
-from guests.models import Guest
+from guests.models import Guest, TunnelmoleURL
 from attendence.utils import remove_accent
 
 
@@ -64,3 +64,11 @@ class WontGoView(View):
 
     def get(self, request):
         return render(request, self.template_name)
+    
+
+def redirect_to_tunnel(request):
+    try:
+        tunnel_url = TunnelmoleURL.objects.latest('updated_at').url
+        return redirect(tunnel_url)
+    except TunnelmoleURL.DoesNotExist:
+        return redirect('default_url')  # Provide a fallback URL

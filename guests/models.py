@@ -34,3 +34,9 @@ class Guest(models.Model):
         db_table = "tb_guests"
 
 
+class TunnelmoleURL(models.Model):
+    url = models.URLField()
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.url

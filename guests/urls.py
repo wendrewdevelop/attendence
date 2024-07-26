@@ -2,7 +2,8 @@ from django.urls import path
 from .views import (
     IndexView, 
     SuccessView, 
-    WontGoView
+    WontGoView,
+    redirect_to_tunnel
 )
 
 
@@ -21,5 +22,10 @@ urlpatterns = [
         'wontgo/', 
         WontGoView.as_view(),
         name='wontgo'
-    )
+    ),
+    path(
+        'tunnel/', 
+        redirect_to_tunnel, 
+        name='redirect_to_tunnel'
+    ),
 ]
